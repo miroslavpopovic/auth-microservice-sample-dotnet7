@@ -1,7 +1,6 @@
 ﻿using IdentityModel.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Net.Http;
 using System.Windows;
 
 namespace Samples.WeatherApi.WpfClient;
@@ -9,7 +8,7 @@ namespace Samples.WeatherApi.WpfClient;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     private string _accessToken = string.Empty;
 
@@ -20,7 +19,7 @@ public partial class MainWindow : Window
 
     private async void OnCallWeatherApiClick(object sender, RoutedEventArgs e)
     {
-        var apiClient = new HttpClient();
+        var apiClient = DangerousHttpClientFactory.Create();
 
         if (!string.IsNullOrWhiteSpace(_accessToken))
         {

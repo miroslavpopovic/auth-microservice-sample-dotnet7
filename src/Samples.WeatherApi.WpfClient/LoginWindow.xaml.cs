@@ -2,7 +2,6 @@
 using IdentityModel.Client;
 using System;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
@@ -16,7 +15,8 @@ namespace Samples.WeatherApi.WpfClient;
 /// </summary>
 public partial class LoginWindow
 {
-    private static readonly IDiscoveryCache Cache = new DiscoveryCache(Constants.AuthUrl);
+    private static readonly IDiscoveryCache Cache =
+        new DiscoveryCache(Constants.AuthUrl, DangerousHttpClientFactory.Create);
     private DeviceAuthorizationResponse _authorizationResponse = new();
 
     public LoginWindow() => InitializeComponent();
@@ -41,7 +41,7 @@ public partial class LoginWindow
             return;
         }
 
-        var client = new HttpClient();
+        var client = DangerousHttpClientFactory.Create();
 
         _authorizationResponse = await client.RequestDeviceAuthorizationAsync(
             new DeviceAuthorizationRequest
@@ -90,7 +90,7 @@ public partial class LoginWindow
             return;
         }
 
-        var client = new HttpClient();
+        var client = DangerousHttpClientFactory.Create();
 
         while (true)
         {
