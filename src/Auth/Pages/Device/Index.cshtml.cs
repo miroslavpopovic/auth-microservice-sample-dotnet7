@@ -27,7 +27,7 @@ namespace Auth.Pages.Device
 
             if (!string.IsNullOrWhiteSpace(userCode))
             {
-                Model = await BuildViewModelAsync(userCode);
+                Model = await BuildViewModelAsync(userCode!);
 
                 if (Model == null)
                 {

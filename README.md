@@ -1,6 +1,6 @@
 # Auth microservice sample
 
-A sample code for a talk "Auth microservice with ASP.NET Core Identity and Duende IdentityServer". This sample is written in .NET 6, using C# 10 and the latest Duende IdentityServer. For an older sample, take a look at https://github.com/miroslavpopovic/auth-microservice-sample/.
+A sample code for a talk "Auth microservice with ASP.NET Core Identity and Duende IdentityServer". This sample is written in .NET 7, using C# 11 and the latest Duende IdentityServer. For older samples, take a look at [.NET 5 sample](https://github.com/miroslavpopovic/auth-microservice-sample/) and [.NET 6 sample](https://github.com/miroslavpopovic/auth-microservice-sample-dotnet6).
 
 As not everyone is able to fulfill the [pricing](https://duendesoftware.com/products/identityserver#pricing) or licensing requirements of Duende Identity Server (or do not want to), there is an alternative sample that uses [OpenIddict](https://github.com/openiddict/openiddict-core) instead of Duende IdentityServer. You can find it here: https://github.com/miroslavpopovic/auth-sample-openiddict.
 
@@ -23,7 +23,7 @@ This is the main project, containing both ASP.NET Core Identity and Duende Ident
 - Custom `ApplicationDbContext`, inherited from `IdentityDbContext` and registered through DI, since we have a new user class
 - Custom `IEmailSender` implementation with [MimeKit](http://www.mimekit.net/)
 
-The next thing was adding and configuring Duende IdentityServer, by following [quickstarts](https://docs.duendesoftware.com/identityserver/v5/quickstarts/).
+The next thing was adding and configuring Duende IdentityServer, by following [quickstarts](https://docs.duendesoftware.com/identityserver/v6/quickstarts/).
 
 ### Auth.Admin
 
@@ -39,7 +39,7 @@ A .NET console application client for WeatherApi. Demonstrates a simple usage of
 
 ### WorkerClient
 
-A .NET worker service client for WeatherApi. Demonstrates the usage of IdentityModel's `AccessTokenManagement`, `HttpClientFactory` and strongly-typed `HttpClient`.
+A .NET worker service client for WeatherApi. Demonstrates the usage of [Duende.AccessTokenManagement](https://github.com/DuendeSoftware/Duende.AccessTokenManagement/), `HttpClientFactory` and strongly-typed `HttpClient`.
 
 ### MvcClient
 
@@ -47,15 +47,15 @@ An ASP.NET Core application which demonstrates several different ways of using a
 
 ### JavaScriptBffClient
 
-A combination of ASP.NET Core backend and JavaScript frontend app demonstrating usage of [BFF Security Framework](https://docs.duendesoftware.com/identityserver/v5/bff/). Note that this approach is [recommended for browser based apps](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps). Another approach would be to do all the security interactions on client-side code, which ends in more complex JavaScript and considerably higher attach surface. It is discouraged for applications dealing with sensitive data. Read more about it in [Duende IdentityServer documentation](https://docs.duendesoftware.com/identityserver/v5/quickstarts/js_clients/).
+A combination of ASP.NET Core backend and JavaScript frontend app demonstrating usage of [Duende BFF Security Framework](https://docs.duendesoftware.com/identityserver/v6/bff/). Note that this approach is [recommended for browser based apps](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps). Another approach would be to do all the security interactions on client-side code, which ends in more complex JavaScript and considerably higher attach surface. It is discouraged for applications dealing with sensitive data. Read more about it in [Duende IdentityServer documentation](https://docs.duendesoftware.com/identityserver/v6/quickstarts/js_clients/).
 
 ### WpfClient
 
-A .NET Core WPF application demonstrating another usage of IdentityModel, as well as the device flow. It simulates the device without browser (i.e. Smart TV or gaming console) and displays link, code and QR code for device flow auth.
+A .NET Core WPF application demonstrating another usage of IdentityModel, as well as the [OAuth 2.0 device flow](https://www.rfc-editor.org/rfc/rfc8628). It simulates the device without keyboard input (i.e. Smart TV or gaming console) and displays link, code and QR code for device flow auth.
 
 ## Preparing
 
-This solution requires .NET 6.0 SDK or higher.
+This solution requires .NET 7.0 SDK or higher.
 
 ### Database connection strings
 
@@ -134,7 +134,7 @@ It will run all the projects and services defined in `./tye.yaml` and serve a da
 
 *Note: The solution contains multiple web projects, configured to run on specific ports. HTTPS addresses with ports are hard-coded throughout the code, for auth URLs and. The same ports are configured for both IISExpress and Kestrel, so you can use either.*
 
-If using Visual Studio 2019+, you can open `Auth.sln` solution. To run multiple projects, right click on the solution in Solution Explorer and choose "Set StartUp Projects...". Select "Multiple" and pick the ones you want to start.
+If using Visual Studio 2022+, you can open `Auth.sln` solution. To run multiple projects, right click on the solution in Solution Explorer and choose "Set StartUp Projects...". Select "Multiple" and pick the ones you want to start.
 
 If running from the command line, you can start the projects you need from the root folder, with:
 
