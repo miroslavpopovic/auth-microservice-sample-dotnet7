@@ -6,6 +6,7 @@ As not everyone is able to fulfill the [pricing](https://duendesoftware.com/prod
 
 ## Presentations
 
+- [November 2022, Advanced Technology Days 17](2022-11-atd-building-auth-microservice.pptx)
 - [October 2022, NetWork 10](2022-10-network-building-auth-microservice.pptx)
 - [October 2022, Lanaco DevHosted01](2022-10-devhosted01-building-auth-microservice.pptx)
 - [August 2022, .NET Day Switzerland](2022-08-dotnetday-building-auth-microservice.pptx)
