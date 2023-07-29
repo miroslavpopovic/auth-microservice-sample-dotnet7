@@ -2,7 +2,10 @@
 
 A sample code for a talk "Auth microservice with ASP.NET Core Identity and Duende IdentityServer". This sample is written in .NET 7, using C# 11 and the latest Duende IdentityServer. For older samples, take a look at [.NET 5 sample](https://github.com/miroslavpopovic/auth-microservice-sample/) and [.NET 6 sample](https://github.com/miroslavpopovic/auth-microservice-sample-dotnet6).
 
-As not everyone is able to fulfill the [pricing](https://duendesoftware.com/products/identityserver#pricing) or licensing requirements of Duende Identity Server (or do not want to), there is an alternative sample that uses [OpenIddict](https://github.com/openiddict/openiddict-core) instead of Duende IdentityServer. You can find it here: https://github.com/miroslavpopovic/auth-sample-openiddict.
+As not everyone is able to fulfill the [pricing](https://duendesoftware.com/products/identityserver#pricing) or licensing requirements of Duende Identity Server (or do not want to), there are alternative samples:
+
+1. Using [OpenIddict](https://github.com/openiddict/openiddict-core) instead of Duende IdentityServer - https://github.com/miroslavpopovic/auth-sample-openiddict.
+2. Using [Keycloak](https://www.keycloak.org/) instead of Duende IdentityServer - https://github.com/miroslavpopovic/auth-sample-keycloak.
 
 ## Presentations
 
