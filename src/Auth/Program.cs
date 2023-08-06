@@ -4,6 +4,7 @@ using Auth.Data;
 using Auth.Email;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder();
@@ -11,6 +12,8 @@ if (builder.Environment.IsEnvironment("Docker"))
 {
     builder.Configuration.AddUserSecrets(typeof(Config).Assembly);
 }
+
+IdentityModelEventSource.ShowPII = true;
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("auth-db");

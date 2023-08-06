@@ -54,13 +54,17 @@ An ASP.NET Core application which demonstrates several different ways of using a
 
 A combination of ASP.NET Core backend and JavaScript frontend app demonstrating usage of [Duende BFF Security Framework](https://docs.duendesoftware.com/identityserver/v6/bff/). Note that this approach is [recommended for browser based apps](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps). Another approach would be to do all the security interactions on client-side code, which ends in more complex JavaScript and considerably higher attach surface. It is discouraged for applications dealing with sensitive data. Read more about it in [Duende IdentityServer documentation](https://docs.duendesoftware.com/identityserver/v6/quickstarts/js_clients/).
 
+### ReactClient
+
+A simple Vite React app that uses [oidc-client-ts](https://authts.github.io/oidc-client-ts/) and [react-oidc-context](https://github.com/authts/react-oidc-context) libraries to demonstrate usage of OpenID Connect in React apps. This sample uses non-confidential client and Authorization Code Flow with PKCE flow.
+
 ### WpfClient
 
 A .NET Core WPF application demonstrating another usage of IdentityModel, as well as the [OAuth 2.0 device flow](https://www.rfc-editor.org/rfc/rfc8628). It simulates the device without keyboard input (i.e. Smart TV or gaming console) and displays link, code and QR code for device flow auth.
 
 ## Preparing
 
-This solution requires .NET 7.0 SDK or higher.
+This solution requires .NET 7.0 SDK or higher. The React sample requires Node.js 16 or higher.
 
 ### Database connection strings
 
@@ -160,6 +164,18 @@ If on Windows, there's a convenient PowerShell script to run all web projects at
 ```shell
 .\run-web-projects.ps1
 ```
+
+#### Running React sample without Tye and Docker
+
+To run the React sample, you need to install Node.js 16 or higher. Then, from the root folder, run:
+
+```shell
+cd src\Samples.WeatherApi.ReactClient
+npm install
+npm run dev
+```
+
+This will start the React app on http://localhost:7216/.
 
 ### Using Docker
 
