@@ -27,6 +27,7 @@ public static class Config
         var authAdminUrl = configuration.GetServiceUri("auth-admin")!.ToString();
         var mvcClientUrl = configuration.GetServiceUri("mvc-client")!.ToString();
         var bffClientUrl = configuration.GetServiceUri("javascriptbff-client")!.ToString();
+        var reactClientUrl = configuration.GetServiceUri("react-client")!.ToString();
 
         return new List<Client>
         {
@@ -119,6 +120,7 @@ public static class Config
                 AllowOfflineAccess = true
             },
 
+            // An interactive web client that's using JavaScript and Backend for Frontend (BFF) pattern
             new()
             {
                 ClientId = "bff-client",
@@ -140,6 +142,34 @@ public static class Config
                     IdentityServerConstants.StandardScopes.Profile,
                     "weather-api"
                 }
+            },
+
+            // An interactive React web client using oidc-client-ts library
+            new()
+            {
+                ClientId = "react-client",
+                RequireClientSecret = false,
+                RequireConsent = true,
+                RequirePkce = true,
+
+                AllowedGrantTypes = GrantTypes.Code,
+
+                // where to redirect to after login
+                RedirectUris = { $"{reactClientUrl}signin-oidc" },
+
+                // where to redirect to after logout
+                PostLogoutRedirectUris = { $"{reactClientUrl}signout-callback-oidc" },
+
+                AllowedCorsOrigins = { reactClientUrl.TrimEnd('/') },
+
+                AllowedScopes =
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "weather-api"
+                },
+
+                AllowOfflineAccess = true
             },
 
             new()
@@ -199,31 +229,30 @@ public static class Config
         var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
         context.Database.Migrate();
 
-        if (!context.Clients.Any())
+        foreach (var client in GetClients(configuration))
         {
-            foreach (var client in GetClients(configuration))
+            if (!context.Clients.Any(c => c.ClientId == client.ClientId))
             {
                 context.Clients.Add(client.ToEntity());
             }
-            context.SaveChanges();
         }
 
-        if (!context.IdentityResources.Any())
+        foreach (var resource in IdentityResources)
         {
-            foreach (var resource in IdentityResources)
+            if (!context.IdentityResources.Any(c => c.Name == resource.Name))
             {
                 context.IdentityResources.Add(resource.ToEntity());
             }
-            context.SaveChanges();
         }
 
-        if (!context.ApiScopes.Any())
+        foreach (var resource in ApiScopes)
         {
-            foreach (var resource in ApiScopes)
+            if (!context.ApiScopes.Any(c => c.Name == resource.Name))
             {
                 context.ApiScopes.Add(resource.ToEntity());
             }
-            context.SaveChanges();
         }
+
+        context.SaveChanges();
     }
 }
