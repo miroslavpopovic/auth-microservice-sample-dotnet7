@@ -39,7 +39,7 @@ public class SuccessModel : DeviceAuthorizationPageModel
     {
         var result = new ProcessConsentResult();
 
-        var request = await _interaction.GetAuthorizationContextAsync(model?.UserCode);
+        var request = await _interaction.GetAuthorizationContextAsync(model?.UserCode ?? string.Empty);
         if (request == null) return result;
 
         ConsentResponse? grantedConsent = null;
@@ -97,7 +97,7 @@ public class SuccessModel : DeviceAuthorizationPageModel
         if (grantedConsent != null)
         {
             // communicate outcome of consent back to IdentityServer
-            await _interaction.HandleRequestAsync(model?.UserCode, grantedConsent);
+            await _interaction.HandleRequestAsync(model?.UserCode ?? string.Empty, grantedConsent);
 
             // indicate that's it ok to redirect back to authorization endpoint
             result.RedirectUri = model?.ReturnUrl;
